@@ -1,0 +1,120 @@
+<html lang="en">
+  <head>
+    <title>Exercise 2 - DevC JavaScript Development Course</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Asap|Overpass');
+
+      body {
+        font-family: 'Asap', sans-serif;
+        width: 400px;
+        margin: auto;
+      }
+
+      h1 {
+        font-family: 'Overpass', sans-serif;
+      }
+
+      .btn {
+        height: 50px;
+      }
+
+      .btn-equals {
+        height: 110px;
+      }
+
+      .btn-orange {
+        background-color: #FD7E14;
+      }
+
+      table {
+        width: 100%;
+      }
+      td, th {
+        padding: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="text-center">Calculator</h1>
+      <form action="">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="text" name="number" id="number" class="form-control">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <table>
+              <tr>
+                <th><button type="button" class="btn btn-warning btn-block" value="C" onclick="calculate(this)"><strong>CE</strong></button></th>
+                <th><button type="button" class="btn btn-warning btn-block" value="/" onclick="calculate(this)"><i class="fas fa-divide"></i></button></th>
+                <th><button type="button" class="btn btn-warning btn-block" value="*" onclick="calculate(this)"><i class="fas fa-times"></i></button></th>
+                <th><button type="button" class="btn btn-warning btn-block" value="backspace" onclick="calculate(this)"><i class="fas fa-backspace"></i></button></th>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-dark btn-block" value="7" onclick="calculate(this)">7</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="8" onclick="calculate(this)">8</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="9" onclick="calculate(this)">9</button></td>
+                <td><button type="button" class="btn btn-warning btn-block" value="-" onclick="calculate(this)"><i class="fas fa-minus"></i></button></td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-dark btn-block" value="4" onclick="calculate(this)">4</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="5" onclick="calculate(this)">5</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="6" onclick="calculate(this)">6</button></td>
+                <td><button type="button" class="btn btn-warning btn-block" value="+" onclick="calculate(this)"><i class="fas fa-plus"></i></button></td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-dark btn-block" value="1" onclick="calculate(this)">1</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="2" onclick="calculate(this)">2</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="3" onclick="calculate(this)">3</button></td>
+                <td rowspan="2"><button type="button" class="btn btn-orange btn-block btn-equals" value="=" onclick="calculate(this)"><i class="fas fa-equals"></i></button></td>
+              </tr>
+              <tr>
+                <td colspan="2"><button type="button" class="btn btn-dark btn-block" value="0" onclick="calculate(this)">0</button></td>
+                <td><button type="button" class="btn btn-dark btn-block" value="." onclick="calculate(this)">.</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      var number = document.getElementById('number');
+      var operator = ['/', '*', '-', '+', '.', '%', '='];
+
+      function calculate (btn) { 
+
+        if (btn.value === 'C') { //Clear the input
+          number.value = '';
+        } else if (btn.value === '=') { //Show total calculation
+          number.value = eval(number.value);
+        } else if (btn.value === 'backspace') { //Backspace funtion
+          var string = number.value;
+
+          number.value = string.substring(0, string.length - 1);
+        } else if (operator.includes(btn.value)) { //Do not allow double operator
+          var string   = number.value;
+          var lastChar = string.substring(string.length - 1);
+
+          if (operator.includes(lastChar)) {
+            console.log('Function not allowed!');
+          } else {
+            number.value += btn.value; //Show number
+          }
+
+        } else {
+          number.value += btn.value; //Show number
+        }
+
+      }
+    </script>
+  </body>
+</html>
